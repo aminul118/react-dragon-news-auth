@@ -7,7 +7,6 @@ import {
 import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
-import Loader from "../pages/Loader";
 
 export const AuthContext = createContext();
 
@@ -15,9 +14,6 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loader, setLoader] = useState(true);
 
-  if (!user) {
-    <Loader />;
-  }
   //   Create new user
   const createNewUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password)
@@ -79,6 +75,7 @@ const AuthProvider = ({ children }) => {
     createNewUser,
     singInUser,
     handleSignOut,
+    loader,
   };
 
   return (
